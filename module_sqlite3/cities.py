@@ -1,3 +1,6 @@
+import sqlite3
+
+
 def get_cities_from_file(f_path):
     with open(f_path, encoding='UTF-16') as file:
         first_line = file.readline()
@@ -12,8 +15,22 @@ def get_cities_from_file(f_path):
             city_set.add((city, region))
     return city_set
 
-F_PATH = r'c:\Users\laa45\Downloads\spisok.csv'
-city_set = get_cities_from_file(F_PATH)
+
+def create_connection(db_path):
+    connection = None
+
+    try:
+        connection = sqlite3.connect(db_path)
+        print("Successfully connection!")
+    except sqlite3.Error as err:
+        print("Error! {err}")
+
+    return connection 
+
+
+
+F_CITIES_PATH = r'spisok.csv'
+city_set = get_cities_from_file(F_CITIES_PATH)
 
 for item in city_set:
     print(item)

@@ -2,3 +2,4 @@ venv/
 module_sqlite3/my_db.db
 module_sqlite3/queries.py
 *.csv
+module_sqlite3/main.py

@@ -58,3 +58,16 @@ def exequte_query(connection : sqlite3.Connection, query : str) -> bool:
 
     return result
 
+
+def exequte_select_query(connection : sqlite3.Connection, query : str) -> list:
+    result = None
+
+    cursor = connection.cursor()
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+    except sqlite3.Error as err:
+        print(f"Error execution! {err}")
+
+    return result
+

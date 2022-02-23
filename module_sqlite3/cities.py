@@ -16,6 +16,22 @@ def get_cities_from_file(f_path : str) -> set():
     return city_set
 
 
+def get_regions_codes_from_file(f_path : str) -> set():
+    with open(f_path, encoding='UTF-16') as file:
+        first_line = file.readline()
+        regions_codes_set = list()
+        while True:
+            line = file.readline()
+            if (not line):
+                break
+            if (len(line) < 3):
+                continue
+            values = line.strip().split(';')
+            region_name, codes = values[0], values[1:]
+            regions_codes_set.append((region_name, codes))
+        return regions_codes_set
+
+
 def create_connection(db_path : str) -> sqlite3.Connection:
     connection = None
 

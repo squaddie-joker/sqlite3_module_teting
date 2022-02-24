@@ -71,3 +71,24 @@ def exequte_select_query(connection : sqlite3.Connection, query : str) -> list:
 
     return result
 
+
+def prepare_values_for_inserting(values : list) -> str:
+    result = None
+    str_list = list()
+    for value in values:
+        try:
+            s_list = list()
+            for item in value:
+                if isinstance(item, str):
+                    s_list.append(f"'{item}'")  
+                else:
+                    s_list.append(item)
+            s = f"({','.join([str(item) for item in s_list])})"
+            str_list.append(s)
+        except Exception as err:
+            print(err)
+    result = ',\n'.join(str_list) + ';'
+
+    return result
+            
+    
